@@ -4,7 +4,6 @@
 // </copyright>
 //-------------------------------------------------------------------------
 
-using System;
 using System.Collections;
 using System.Linq;
 using Full_GRASP_And_SOLID.Library;
@@ -25,7 +24,11 @@ namespace Full_GRASP_And_SOLID
             recipe.FinalProduct = GetProduct("Café con leche");
             recipe.AddStep(new Step(GetProduct("Café"), 100, GetEquipment("Cafetera"), 120));
             recipe.AddStep(new Step(GetProduct("Leche"), 200, GetEquipment("Hervidor"), 60));
-            recipe.PrintRecipe();
+
+            // PrintRecipe ahora delega la acción para cumplir SRP, pero como
+            // sus pasos son privados sigue teniendo que ser Recipe el que
+            // llama a ConsolePrinter
+            ConsolePrinter.PrintRecipe(recipe);
         }
 
         private static void PopulateCatalogs()
